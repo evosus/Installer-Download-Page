@@ -1,0 +1,232 @@
+
+  <!DOCTYPE html>
+  <html>
+    <head>
+      <title>Evosus Business Management Software Installation - Version 6.6</title>
+      <!--Import Google Icon Font-->
+      <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+         <link href="https://fonts.googleapis.com/css?family=Raleway|Roboto" rel="stylesheet">
+      <!--Import materialize.css-->
+      <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/materialize/0.99.0/css/materialize.min.css">
+
+
+      <!--Let browser know website is optimized for mobile-->
+      <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+        <style>
+          .container {
+            max-width: 980px;
+          }
+          body {
+            display: flex;
+            min-height: 100vh;
+            flex-direction: column;
+          }
+          main {
+            flex: 1 0 auto;
+          }
+          nav {
+              background-color: #02708C;
+            }
+          [type="checkbox"]:checked+label:before {
+            border-right: 3px solid #fa9345;
+            border-bottom: 3px solid #fa9345;
+          }
+          input[type=text]:not(.browser-default).valid, 
+          input[type=text]:not(.browser-default):focus.valid{
+            border-bottom: 1px solid #02708C;
+            box-shadow: 0 1px 0 0 #02708C;
+          }
+          .page-footer {
+              background-color: #02708C;
+            }
+          .btn,
+          .btn-large,
+          .btn:hover, 
+          .btn-large:hover {
+            background-color: #FA9345;
+          }
+          .footer-link {
+            color: #fff;
+            font-weight: bold;
+          }
+          .footer-link:hover {
+            text-decoration: underline;
+          }
+          i.clr-org {
+            color: #fa9345;
+          }
+      </style>
+    </head>
+    <header>
+      <nav>
+        <div class="nav-wrapper">
+          <a href="http://www.evosus.com/" class="brand-logo"><img style="height: 45px; margin: 10px 5px;" src="https://cdn.rawgit.com/evosus/freshdesk/Phase-1/img/logo.png" /></a>
+        </div><!-- end nav-wrapper -->
+      </nav>
+    </header>
+    <main>
+    <div class="container">
+    <h1>Evosus Business Management Software</h1> 
+    <h2>Version 6.6.215</h2>
+    <ul class="collection z-depth-2">
+      <li class="collection-item"><a href="http://ee-support.evosus.com/support/solutions/articles/14000067160-evosus-business-management-software-version-6-6-download-and-installation-instructions" target="_blank">Installation Instructions</a></li>
+      <li class="collection-item"><a href="http://ee-support.evosus.com/support/solutions/articles/14000065691-evosus-business-management-software-release-notes-version-6-6" target="_blank">Release Notes - Be sure to read the release notes before upgrading so that you're prepared for the changes. <a/></li>
+      <li class="collection-item"><a href="http://ee-support.evosus.com/support/solutions/articles/14000064887-evosus-business-management-software-minimum-software-requirements" target="_blank">Minimum System Requirements</a></li>
+    </ul>
+
+    <h3>Please verify the following before installing the application...</h3>
+
+    <ul class="collection z-depth-2" style="margin-bottom: 75px;">
+      <li class="collection-item">
+        <input type="checkbox" id="os" />
+        <label for="os">Your servers, host PCs, and local installations are all using a supported operating system - <a href="https://cdn.evosus.com/ee/help/6.6/upgrade-evosus.html#os" target="_blank">More</a></label>
+      </li>
+      <li class="collection-item">
+        <input type="checkbox" id="sql" />
+        <label for="sql">You are using a supported version of Microsoft SQL Server - <a href="https://cdn.evosus.com/ee/help/6.6/upgrade-evosus.html#sql" target="_blank">More</a></label>
+      </li>
+      <li class="collection-item">
+        <input type="checkbox" id="emv" />
+        <label for="emv">If you use Evosus Card Services, OpenEdge HAS already helped you upgrade to version 6.5 or greater. That means if you have card reader terminals, you have upgraded to the new EMV chip card reader terminals and worked with OpenEdge to complete the upgrade process - <a href="https://evosus.freshdesk.com/support/solutions/articles/14000062759-evosus-card-services-setup-overview" target="_blank">More</a></label>
+      </li>
+      <li class="collection-item">
+        <input type="checkbox" id="war" />
+        <label for="war"><strong>DO NOT INSTALL THIS UPDATE if you use Evosus Card Services and OpenEdge has NOT already upgraded you to version 6.5 or greater </strong> - If you do install this update, you will lose the ability to process credit cards. Restoring your credit card processing will be billable at $165 an hour.</label>
+      </li>
+      <li id="snVerify" class="collection-item hide">
+        
+          <!-- this is the companySN verify -->
+
+           <form>
+              <div class="form-group" style="margin: 50px 30px;">
+                <div class="input-field" >
+                  <input placeholder="XXXXXXXXXXXXXX-XXX" type="text" id="companySNInput" class="validate" pattern="[0-9]{14}[-]{1}[0-9]{3}">
+                  <label for="companySNInput" data-error="Must be XXXXXXXXXXXXXX-XXX">Enter your company serial number (Open Evosus > Help > Company Serial Number)</label>
+                </div>
+
+              <button type="button" id="testCompanySN" class="btn btn-primary disabled">Validate</button>
+              </div>
+          </form>
+
+
+
+      </li>
+    </ul>
+
+     </div><!-- end container-->
+      </main>
+      <footer class="page-footer">
+      <div class="container">
+        <div class="row">
+          <div class="col l6 s12">
+            <h5 class="white-text">Version 6.6</h5>
+            <p class="grey-text text-lighten-4">See the <a class="footer-link" href="https://cdn.evosus.com/ee/help/6.6/upgrade-evosus.html">download and installation instructions</a> for information about installing the latest release.</p>
+            <p class="grey-text text-lighten-4">See the <a class="footer-link" href="https://cdn.evosus.com/ee/help/6.6/">online help</a> for general information about version 6.6.</p>
+          </div>
+          <div class="col l4 offset-l2 s12">
+            <h5 class="white-text">Links</h5>
+            <ul>
+              <li><a class="grey-text text-lighten-3" href="http://www.evosus.com/eula/">EULA</a></li>
+              <li><a class="grey-text text-lighten-3" href="http://www.evosus.com/SLA/">SLA</a></li>
+              <li><a class="grey-text text-lighten-3" href="http://www.evosus.com/media/doc/PrivacyPolicy.pdf">Privacy</a></li>
+            </ul>
+          </div>
+        </div>
+      </div>
+      <div class="footer-copyright">
+        <div class="container">&#169; 2017 Evosus, Inc. ALL RIGHTS RESERVED
+        <a class="grey-text text-lighten-4 right" href="http://www.evosus.com/">Evosus.com</a>
+        </div>
+      </div>
+    </footer>
+
+    <body>
+    
+    <!--Import jQuery before materialize.js-->
+    <script type="text/javascript" src="https://code.jquery.com/jquery-2.1.1.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/0.99.0/js/materialize.min.js"></script>
+    
+    <script>
+     $(document).ready(function(){
+
+
+      //checkboxes make company sn validation appear
+      $( "input[type=checkbox]" ).click(function(){
+        var count = $( "input:checked" ).length;
+
+        if (count === 4) {
+          $('#snVerify').removeClass("hide");
+        } else {
+           $('#snVerify').addClass("hide");
+        }
+      });
+
+      //Enable company sn validate button
+      $('#companySNInput').blur( function(){
+
+        if($('#companySNInput').hasClass('valid')){
+          $('#testCompanySN').removeClass('disabled');
+        }else{
+          $('#testCompanySN').addClass('disabled');
+        }
+
+      });
+
+
+    // use supprthold_check API
+    $("#testCompanySN").click(function(){
+          // Get companySN 
+          var companySNEntered = $("#companySNInput").val();
+          //light validation - remove any evil characters
+          companySNClean = companySNEntered.replace(/(<([^>]+)>)/ig,"");
+          argPassed = '{"args": {"CompanySN": "' + companySNClean + '"}}';
+
+          
+          var settings = {
+          "async": true,
+          "crossDomain": true,
+          "url": "https://cloud3.evosus.com/api/method/SupportHold_Check?CompanySN=20031006123650-594&ticket=b4210dc8-513c-4a9c-aeb1-315e89daba03",
+          "method": "POST",
+          "headers": {
+            "content-type": "application/json"
+          },
+          "processData": false,
+          "data": argPassed
+        }
+
+          $.ajax(settings).done(function (data) {
+            if(data.code == "OK") {
+              
+              //api returns an object inside an array. just removing the brackets to get to the object
+              var responseString = JSON.stringify(data.response);
+              var responseLn = responseString.length; 
+              responseString = responseString.slice(1, responseLn-1);
+
+              //parse responseString
+              var responseObj = JSON.parse(responseString);
+
+              //supporthold
+              if(responseObj.SupportHold == 'YES'){
+                $('#snVerify').html('<div class="center-align"><i class="large material-icons clr-org">report_problem</i></div><h4 class="center-align">You are currently on support hold.</h4><p class="center-align">Please contact your Account Manager at <a href="http:\\support.evosus.com">https:\\support.evosus.com</a>.</p>');
+              //not on support hold
+              }else {
+                 $('#snVerify').html('<div class="center-align"><i class="large material-icons clr-org">get_app</i></div><div class="center-align"><a class="waves-effect waves-light btn" href="' + responseObj.URLPath + '">Download</a></div><p class="center-align">Be sure to read the <a href="http://ee-support.evosus.com/support/solutions/articles/14000067160-evosus-business-management-software-version-6-6-download-and-installation-instructions">installation instructions</a> before installing.</p>');
+              }
+
+            //supporthold_check TO
+            }else {
+              $('#snVerify').html('<div class="center-align"><i class="large material-icons clr-org">access_alarm</i></div><h4 class="center-align">Zzzz.</h4><p class="center-align">This service is only available from 5am-11PM PST.</p><p class="center-align">If you get this message during normal business hours, try it again in a couple minutes. If you are still getting this message, then contact your Account Manager at <a href="http:\\support.evosus.com">https:\\support.evosus.com</a>.</p>');
+            }
+            
+
+          });
+
+
+        });
+
+
+
+    });
+    </script>
+    </body>
+  </html>
