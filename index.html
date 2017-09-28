@@ -31,10 +31,43 @@
             border-right: 3px solid #fa9345;
             border-bottom: 3px solid #fa9345;
           }
+          input:-webkit-autofill, textarea:-webkit-autofill, select:-webkit-autofill{
+                background-color: #eeeeee;
+          }
+          input:not([type]).valid+label:after, 
+          input:not([type]):focus.valid+label:after, 
+          input[type=text]:not(.browser-default).valid+label:after, 
+          input[type=text]:not(.browser-default):focus.valid+label:after, 
+          input[type=password]:not(.browser-default).valid+label:after, 
+          input[type=password]:not(.browser-default):focus.valid+label:after, 
+          input[type=email]:not(.browser-default).valid+label:after, 
+          input[type=email]:not(.browser-default):focus.valid+label:after, 
+          input[type=url]:not(.browser-default).valid+label:after, 
+          input[type=url]:not(.browser-default):focus.valid+label:after, 
+          input[type=time]:not(.browser-default).valid+label:after, 
+          input[type=time]:not(.browser-default):focus.valid+label:after, 
+          input[type=date]:not(.browser-default).valid+label:after, 
+          input[type=date]:not(.browser-default):focus.valid+label:after, 
+          input[type=datetime]:not(.browser-default).valid+label:after, 
+          input[type=datetime]:not(.browser-default):focus.valid+label:after, 
+          input[type=datetime-local]:not(.browser-default).valid+label:after, 
+          input[type=datetime-local]:not(.browser-default):focus.valid+label:after, 
+          input[type=tel]:not(.browser-default).valid+label:after, 
+          input[type=tel]:not(.browser-default):focus.valid+label:after, 
+          input[type=number]:not(.browser-default).valid+label:after, 
+          input[type=number]:not(.browser-default):focus.valid+label:after, 
+          input[type=search]:not(.browser-default).valid+label:after, 
+          input[type=search]:not(.browser-default):focus.valid+label:after, 
+          textarea.materialize-textarea.valid+label:after, 
+          textarea.materialize-textarea:focus.valid+label:after {
+                color: #363636;
+          }
           input[type=text]:not(.browser-default).valid, 
-          input[type=text]:not(.browser-default):focus.valid{
-            border-bottom: 1px solid #02708C;
-            box-shadow: 0 1px 0 0 #02708C;
+          input[type=text]:not(.browser-default):focus.valid,
+          input[type=text]:not(.browser-default):focus,
+          input[type=text]:not(.browser-default):focus:not([readonly]){
+            border-bottom: 1px solid #363636;
+            box-shadow: 0 1px 0 0 #363636;
           }
           .page-footer {
               background-color: #02708C;
@@ -42,7 +75,8 @@
           .btn,
           .btn-large,
           .btn:hover, 
-          .btn-large:hover {
+          .btn-large:hover,
+          .btn:focus, .btn-large:focus, .btn-floating:focus {
             background-color: #FA9345;
           }
           .footer-link {
@@ -100,7 +134,7 @@
            <form>
               <div class="form-group" style="margin: 50px 30px;">
                 <div class="input-field" >
-                  <input placeholder="XXXXXXXXXXXXXX-XXX" type="text" id="companySNInput" class="validate" pattern="[0-9]{14}[-]{1}[0-9]{3}">
+                  <input placeholder="XXXXXXXXXXXXXX-XXX" type="text" id="companySNInput" class="validate" pattern="[0-9]{14}[-]{1}[0-9]{3}" autocomplete="off">
                   <label for="companySNInput" data-error="Must be XXXXXXXXXXXXXX-XXX">Enter your company serial number (Open Evosus > Help > Company Serial Number)</label>
                 </div>
 
@@ -164,7 +198,7 @@
       //Enable company sn validate button
       $('#companySNInput').blur( function(){
 
-        if($('#companySNInput').hasClass('valid')){
+        if($(this).hasClass('valid')){
           $('#testCompanySN').removeClass('disabled');
         }else{
           $('#testCompanySN').addClass('disabled');
@@ -175,8 +209,14 @@
 
     // use supprthold_check API
     $("#testCompanySN").click(function(){
+          
           // Get companySN 
           var companySNEntered = $("#companySNInput").val();
+
+          //spinner
+          $('#snVerify').html('<div class="center-align" style="margin: 50px 0;"><div class="preloader-wrapper big active"><div class="spinner-layer spinner-blue"><div class="circle-clipper left"><div class="circle"></div></div><div class="gap-patch"><div class="circle"></div></div><div class="circle-clipper right"><div class="circle"></div></div></div><div class="spinner-layer spinner-red"><div class="circle-clipper left"><div class="circle"></div></div><div class="gap-patch"><div class="circle"></div></div><div class="circle-clipper right"><div class="circle"></div></div></div><div class="spinner-layer spinner-yellow"><div class="circle-clipper left"><div class="circle"></div></div><div class="gap-patch"><div class="circle"></div></div><div class="circle-clipper right"><div class="circle"></div></div></div><div class="spinner-layer spinner-green"><div class="circle-clipper left"><div class="circle"></div></div><div class="gap-patch"><div class="circle"></div></div><div class="circle-clipper right"><div class="circle"></div></div></div></div></div>');
+
+          
           //light validation - remove any evil characters
           companySNClean = companySNEntered.replace(/(<([^>]+)>)/ig,"");
           argPassed = '{"args": {"CompanySN": "' + companySNClean + '"}}';
@@ -207,15 +247,26 @@
 
               //supporthold
               if(responseObj.SupportHold == 'YES'){
-                $('#snVerify').html('<div class="center-align"><i class="large material-icons clr-org">report_problem</i></div><h4 class="center-align">You are currently on support hold.</h4><p class="center-align">Please contact your Account Manager at <a href="http:\\support.evosus.com">https:\\support.evosus.com</a>.</p>');
+                $('#snVerify').html('<div class="center-align"><i class="large material-icons clr-org">report_problem</i></div><h4 class="center-align">Sorry. You might be on support hold.</h4><p class="center-align">Please contact <a href="mailto:accounting@evosus.com?Subject=Support%20Hold?" target="_top">accounting@evosus.com</a>.</p>');
               //not on support hold
               }else {
                  $('#snVerify').html('<div class="center-align"><i class="large material-icons clr-org">get_app</i></div><div class="center-align"><a class="waves-effect waves-light btn" href="' + responseObj.URLPath + '">Download</a></div><p class="center-align">Be sure to read the <a href="http://ee-support.evosus.com/support/solutions/articles/14000067160-evosus-business-management-software-version-6-6-download-and-installation-instructions">installation instructions</a> before installing.</p>');
               }
 
-            //supporthold_check TO
-            }else {
-              $('#snVerify').html('<div class="center-align"><i class="large material-icons clr-org">access_alarm</i></div><h4 class="center-align">Zzzz.</h4><p class="center-align">This service is only available from 5am-11PM PST.</p><p class="center-align">If you get this message during normal business hours, try it again in a couple minutes. If you are still getting this message, then contact your Account Manager at <a href="http:\\support.evosus.com">https:\\support.evosus.com</a>.</p>');
+            }
+
+            //supporthold_check Time Out
+            if(data.code == "TO"){
+              $('#snVerify').html('<div class="center-align"><i class="large material-icons clr-org">access_alarm</i></div><h4 class="center-align">Zzzz.</h4><p class="center-align">This service is only available from 5am-11PM PST.</p><p class="center-align">If you get this message during normal business hours, try it again in a couple minutes. If you are still getting this message, then contact your Account Manager at <a href="https://support.evosus.com">https://support.evosus.com</a>.</p>');
+            }
+
+            //supporthold_check bad companySN
+            if(data.code == "ER" && data.message.startsWith("This CompanySN")){
+              $('#snVerify').html('<div class="center-align"><i class="large material-icons clr-org">pan_tool</i></div><h4 class="center-align">No bueno.</h4><p class="center-align">That company serial number does not exist. Refresh your browser to try again.</p><p class="center-align">To find your company serial number, log into Evosus and go to Help > Company Serial Number. If that still does not work, create a ticket to contact your <a href="https://support.evosus.com">Account Manager</a>.</p>');
+            }else if (data.code == "ER"){
+                var errorText = data.code + " " + data.status;
+               $('#snVerify').html('<div class="center-align"><i class="large material-icons clr-org">mood_bad</i></div><h4 class="center-align">Oops.</h4><p class="center-align"></p><p class="center-align">Something bad has happened. Try again in a few minutes, and if you are still getting this message, create a ticket to contact your <a href="https://support.evosus.com">Account Manager</a>.</p><p class="center-align">' + errorText + '</p>');
+               
             }
             
 
