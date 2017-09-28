@@ -190,6 +190,8 @@
 
         if (count === 4) {
           $('#snVerify').removeClass("hide");
+          $('#companySNInput').focus();
+
         } else {
            $('#snVerify').addClass("hide");
         }
@@ -204,6 +206,21 @@
           $('#testCompanySN').addClass('disabled');
         }
 
+      });
+
+      //new companysn validation to enable validatebutton 
+      $('#companySNInput').keyup(function(){
+        var enteredValue = $(this).val();
+        var testResult = enteredValue.match(/[0-9]{14}[-]{1}[0-9]{3}/g);
+        
+        if( testResult != null){
+          $('#testCompanySN').removeClass('disabled').focus();
+          $('#companySNInput').removeClass('invalid');
+          next
+        }else{
+          $('#testCompanySN').addClass('disabled');
+        }
+        
       });
 
 
